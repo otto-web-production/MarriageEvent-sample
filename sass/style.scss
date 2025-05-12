@@ -1,0 +1,1704 @@
+@charset "UTF-8";
+
+//色
+$color-bg:#E9E3DA;
+$color-blue: #065190;
+$color-whiteBlue: #AFCFEA;
+$color-lightBlue: #6EC5EE;
+$color-footer: #002B4C;
+
+
+
+//フォント
+$font-base: "Noto Serif JP", serif;
+
+//レイアウト
+$breakpoints: (
+    "sp-L":"(max-width: 419px)", //300px~419px
+    "sp-M":"(max-width: 529px)", //SP=420px 420px~529px
+    "sp-H":"(max-width: 649px)", //530px~649px
+    "tab-L":"(max-width: 769px)", //650px~769px
+    "tab-M":"(max-width: 889px)", //tab=860px 770px~889px
+    "tab-H":"(max-width: 1009px)", //890px~1009px
+    "pc-L":"(max-width: 1129px)", //1010px~1129px
+    "pc-M":"(max-width: 1439px)", //1130px~1439px
+    "pc-H":"(min-width: 1440px)", //pc=1440px 1440px~
+);
+
+//メディアクエリ
+@mixin mq($breakpoint: sp) {
+    @media #{map-get($breakpoints, $breakpoint)}{
+        @content;
+    }
+}
+
+/* リセットCSS
+===================================== */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, button, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+html {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+li, dd {
+    list-style-type: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+caption, th, td {
+    font-weight: normal;
+    text-align: left;
+    vertical-align: middle;
+}
+
+q, blockquote {
+    quotes: none;
+  }
+
+q {
+    &:before, &:after {
+      content: "";
+      content: none;
+    }
+}
+
+blockquote {
+    &:before, &:after {
+      content: "";
+      content: none;
+    }
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+    display: block;
+}
+
+img {
+    border: none;
+    vertical-align: bottom;
+}
+
+
+// 基本設定
+*,*::before,*::after {
+    box-sizing: border-box;
+}
+
+html,body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family:$font-base;
+    font-weight: 200; //font-wightはMediumを500とする
+    overflow: hidden;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+ul,ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    padding: 0;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+//pc-bg
+.pc-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+
+    @include mq(tab-H) {
+        display: none;
+    }
+}
+
+.pc-body {
+    @include mq(pc-H) {
+        width: 1440px;
+        height: 100vh;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.pc-bg-left {
+    position: absolute;
+    height: calc(100vh - 140px);
+    width: 400px;
+    top: 60px;
+    left: 60px;
+
+    @include mq(pc-M) {
+        display: none;
+    }
+}
+
+.pc-bg-logo {
+    width: 140px;
+    height: 140px;
+}
+
+.pc-bg-buttons {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 20px;
+    font-size: 26px;
+}
+
+.pc-bg-btn {
+    color: $color-lightBlue;
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 30px;
+
+    &::before {
+        content: "";
+        width: 3px;
+        height: 20px;
+        background: linear-gradient($color-lightBlue, $color-blue, $color-lightBlue);
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
+}
+
+.pc-bg-footer {
+    position: absolute;
+    bottom: 0;
+    font-size: 20px;
+    color: #fff;
+    line-height: 1.3em;
+}
+
+.pc-bg-footer-text {
+    margin-bottom: 30px;
+}
+
+//homepage-body
+.homepage {
+    background: $color-bg;
+    letter-spacing: -0.05em;
+    position: absolute;
+    height: 100vh;
+    overflow-y: auto;
+
+    @include mq(pc-H) {
+        font-size: 24px;
+        width: 860px;
+        top: 50px;
+        left: auto;
+        right: 50px;
+        transform: none;
+    }
+
+    @include mq(pc-M) {
+        font-size: 28px;
+        width: 1010px;
+        top: 30px;
+        left: 50%;
+        right: 0;
+        transform: translateX(-50%);
+    }
+
+    @include mq(pc-L) {
+        top: 0;
+    }
+
+    @include mq(tab-H) {
+        position: relative;
+        max-width: 1010px;
+        width: 100%;
+        top: 0;
+    }
+
+    @include mq(tab-M) {
+        font-size: 24px;
+    }
+
+    @include mq(tab-L) {
+        font-size: 20px;
+    }
+
+    @include mq(sp-H) {
+        font-size: 18px;
+    }
+
+    @include mq(sp-M) {
+        font-size: 16px;
+    }
+
+    @include mq(sp-L) {
+        font-size: 12px;
+    }
+}
+
+.parts-title {
+    font-weight: 600;
+    color: $color-blue;
+    text-shadow: 2px 2px 4px rgba(#000, 0.4);
+
+    @include mq(pc-H) {
+        font-size: 40px;
+        margin-left: 60px;
+    }
+
+    @include mq(pc-M) {
+        font-size: 48px;
+        margin-left: 80px;
+    }
+
+    @include mq(tab-M) {
+        font-size: 40px;
+        margin-left: 60px;
+    }
+
+    @include mq(tab-L) {
+        font-size: 32px;
+        margin-left: 40px;
+    }
+
+    @include mq(sp-H) {
+        font-size: 28px;
+        margin-left: 30px;
+    }
+
+    @include mq(sp-M) {
+        font-size: 24px;
+        margin-left: 20px;
+    }
+
+    @include mq(sp-L) {
+        font-size: 20px;
+    }
+
+}
+
+.to-form-button {
+    border-radius: 25px;
+    background: $color-whiteBlue;
+    box-shadow: 0 6px 0 rgba($color-blue, 0.7);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-weight: 600;
+
+    @include mq(pc-H) {
+        font-size: 20px;
+        width: 260px;
+        margin-top: 60px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    @include mq(pc-M) {
+        font-size: 24px;
+        width: 300px;
+        margin-top: 80px;
+        height: 60px;
+        line-height: 60px;
+    }
+
+    @include mq(tab-M) {
+        font-size: 20px;
+        width: 260px;
+        margin-top: 60px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    @include mq(tab-L) {
+        font-size: 18px;
+        width: 240px;
+        margin-top: 40px;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    @include mq(sp-H) {
+        font-size: 16px;
+        width: 200px;
+        margin-top: 30px;
+    }
+
+    @include mq(sp-M) {
+        font-size: 14px;
+        width: 170px;
+        margin-top: 15px;
+    }
+}
+
+// top
+.top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+}
+
+.homepage-body {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+
+    @include mq(pc-H) {
+        padding-top: 1040px;
+        width: 860px;
+    }
+
+    @include mq(pc-M) {
+        padding-top: 1220px;
+        width: 1010px;
+    }
+
+    @include mq(tab-H) {
+        padding-top: calc(1080px + 100vw - 890px);
+        max-width: 960px;
+        width: 100%;
+    }
+
+    @include mq(tab-M) {
+        padding-top: calc(940px + 100vw - 770px);
+        max-width: 860px;
+    }
+
+    @include mq(tab-L) {
+        padding-top: calc(820px + 100vw - 650px);
+        max-width: 720px;
+    }
+
+    @include mq(sp-H) {
+        padding-top: calc(650px + 100vw - 530px);
+        max-width: 600px;
+    }
+
+    @include mq(sp-M) {
+        padding-top: calc(510px + 100vw - 420px);
+        max-width: 460px;
+    }
+
+    @include mq(sp-L) {
+        padding-top: calc(350px + 100vw - 300px);
+    }
+}
+
+// 概要
+.first-body {
+    @include mq(pc-H) {
+        margin-left: 80px;
+        margin-right: 80px;
+    }
+
+    @include mq(pc-M) {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+
+    @include mq(tab-M) {
+        margin-left: 80px;
+        margin-right: 80px;
+    }
+
+    @include mq(tab-L) {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    @include mq(sp-H) {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    @include mq(sp-M) {
+        margin-left: 30px;
+        margin-right: 30px;    
+    }
+
+    @include mq(sp-L) {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+.first-name {
+    font-weight: 600;
+
+    @include mq(pc-H) {
+        font-size: 32px;
+        margin-top: 30px;
+    }
+
+    @include mq(pc-M) {
+        font-size: 40px;
+        margin-top: 30px;
+    }
+
+    @include mq(tab-M) {
+        font-size: 32px;
+    }
+
+    @include mq(tab-L) {
+        font-size: 24px;
+        margin-top: 20px;
+    }
+
+    @include mq(sp-M) {
+        font-size: 18px;
+        margin-top: 15px;
+    }
+
+    @include mq(sp-L) {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+}
+
+.first-comment {
+    @include mq(pc-H) {
+        font-size: 18px;
+        margin-top: 15px;
+    }
+
+    @include mq(pc-M) {
+        font-size: 20px;
+        margin-top: 15px;
+    }
+
+    @include mq(tab-M) {
+        font-size: 18px;
+    }
+
+    @include mq(tab-L) {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    @include mq(sp-H) {
+        font-size: 12px;
+        margin-top: 10px;
+    }
+
+    @include mq(sp-M) {
+        font-size: 10px;
+        margin-top: 8px;
+    }
+
+    @include mq(sp-L) {
+        font-size: 8px;
+    }
+
+}
+
+.first-text {
+    display: flex;
+    line-height: 1.2em;
+
+    @include mq(pc-H) {
+        margin-top: 20px;
+    }
+
+    @include mq(pc-M) {
+        margin-top: 25px;
+    }
+
+    @include mq(tab-M) {
+        margin-top: 20px;
+    }
+
+    @include mq(tab-L) {
+        margin-top: 15px;
+    }
+
+    @include mq(sp-H) {
+        margin-top: 10px;
+    }
+
+    @include mq(sp-M) {
+        margin-top: 5px;
+    }
+}
+
+.first-map {
+    position: relative;
+
+    @include mq(pc-H) {
+        width: 860px;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        left: -80px;
+    }
+
+    @include mq(pc-M) {
+        width: 1010px;
+        margin-top: 40px;
+        margin-bottom: 25px;
+        left: -100px;
+    }
+
+    @include mq(tab-H) {
+        width: calc(100% + 200px);
+    }
+
+    @include mq(tab-M) {
+        width: calc(100% + 160px);
+        margin-top: 30px;
+        margin-bottom: 15px;
+        left: -80px;
+    }
+
+    @include mq(tab-L) {
+        width: calc(100% + 100px);
+        margin-top: 25px;
+        left: -50px;
+    }
+
+    @include mq(sp-H) {
+        width: calc(100% + 80px);
+        margin-top: 20px;
+        margin-bottom: 10px;
+        left: -40px;
+    }
+
+    @include mq(sp-M) {
+        width: calc(100% + 60px);
+        margin-top: 10px;
+        left: -30px;
+    }
+
+}
+
+.first-sub-comment {
+    @include mq(pc-H) {
+        font-size: 18px;
+    }
+
+    @include mq(pc-M) {
+        font-size: 20px;
+    }
+
+    @include mq(tab-M) {
+        font-size: 18px;
+    }
+
+    @include mq(tab-L) {
+        font-size: 14px;
+    }
+
+    @include mq(sp-H) {
+        font-size: 12px;
+    }
+
+    @include mq(sp-M) {
+        font-size: 10px;
+    }
+}
+
+// 流れ
+.parts-second {
+    position: relative;
+    @include mq(pc-H) {
+        margin-top: 100px;
+    }
+
+    @include mq(pc-M) {
+        margin-top: 140px;
+    }
+
+    @include mq(tab-M) {
+        margin-top: 100px;
+    }
+
+    @include mq(tab-L) {
+        margin-top: 80px;
+    }
+
+    @include mq(sp-M) {
+        margin-top: 60px;
+    }
+
+    @include mq(sp-L) {
+        margin-top: 30px;
+    }
+}
+
+.second-body {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include mq(pc-H) {
+        margin-top: 40px;
+        width: 710px;
+    }
+
+    @include mq(pc-M) {
+        width: 810px;
+        margin-top: 40px;
+    }
+
+    @include mq(tab-H) {
+        width: 710px;
+    }
+
+    @include mq(tab-M) {
+        width: 610px;
+    }
+
+    @include mq(tab-L) {
+        margin-top: 30px;
+        width: 550px;
+    }
+
+    @include mq(sp-H) {
+        width: 450px;
+    }
+
+    @include mq(sp-M) {
+        margin-top: 20px;
+        width: 370px;
+    }
+
+    @include mq(sp-L) {
+        margin-top: 15px;
+        width: 260px;
+    }
+}
+
+.second-part {
+    border-bottom: 1px dotted #000;
+
+    @include mq(pc-H) {
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+
+    @include mq(pc-M) {
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+
+    @include mq(tab-M) {
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+
+    @include mq(sp-H) {
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+.second-flex {
+    display: flex;
+    line-height: 1.3em;
+}
+
+.second-left {
+    @include mq(pc-H) {
+        flex: 0 0 150px;
+    }
+
+    @include mq(pc-M) {
+        flex: 0 0 150px;
+    }
+
+    @include mq(tab-M) {
+        flex: 0 0 130px;
+    }
+
+    @include mq(tab-L) {
+        flex: 0 0 110px;
+    }
+
+    @include mq(sp-H) {
+        flex: 0 0 95px;
+    }
+
+    @include mq(sp-M) {
+        flex: 0 0 80px;
+    }
+
+    @include mq(sp-L) {
+        flex: 0 0 65px;
+    }
+
+    .right {
+        float: right;
+    }
+}
+
+.second-center {
+    content: "";
+    border-radius: 100%;
+    background: $color-whiteBlue;
+    position: relative;
+    z-index: 15;
+
+    @include mq(pc-H) {
+        flex: 0 0 18px;
+        height: 18px;
+        margin-top: 9px;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    @include mq(pc-M) {
+        flex: 0 0 18px;
+        height: 18px;
+        margin-top: 9px;
+        margin-right: 50px;
+        margin-left: 50px;
+    }
+
+    @include mq(tab-H) {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    @include mq(tab-M) {
+        flex: 0 0 14px;
+        height: 14px;
+        margin-top: 8.5px;
+    }
+
+    @include mq(tab-L) {
+        margin-top: 6px;
+    }
+
+    @include mq(sp-H) {
+        flex: 0 0 10px;
+        height: 10px;
+        margin-top: 7px;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+    @include mq(sp-M) {
+        margin-top: 5px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    @include mq(sp-L) {
+        margin-top: 2.5px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+.second-title {
+    font-weight: 600;
+
+    .right {
+        float: right;
+    }
+}
+
+.second-text {
+    @include mq(pc-H) {
+        font-size: 20px;
+        margin-top: 5px;
+        margin-left: 20px;
+    }
+
+    @include mq(pc-M) {
+        font-size: 24px;
+        margin-top: 10px;
+        margin-left: 30px;
+    }
+
+    @include mq(tab-M) {
+        font-size: 20px;
+        margin-top: 5px;
+        margin-left: 20px;
+    }
+
+    @include mq(tab-L) {
+        font-size: 16px;
+    }
+
+    @include mq(sp-H) {
+        font-size: 14px;
+    }
+
+    @include mq(sp-M) {
+        font-size: 12px;
+        margin-left: 10px;
+    }
+
+    @include mq(sp-L) {
+        font-size: 10px;
+    }
+}
+
+.second-text-fifth {
+    @include mq(pc-H) {
+        margin-top: 45px;
+    }
+
+    @include mq(pc-M) {
+        margin-top: 45px;
+    }
+
+    @include mq(tab-M) {
+        margin-top: 30px;
+    }
+
+    @include mq(tab-L) {
+        margin-top: 30px;
+    }
+
+    @include mq(sp-H) {
+        margin-top: 25px;
+    }
+
+    @include mq(sp-L) {
+        margin-top: 20px;
+    }
+}
+
+.second-image-first {
+    margin-left: auto;
+
+    @include mq(pc-H) {
+        width: 300px;
+        height: 300px;
+        margin-top: 10px;
+        margin-right: 40px;
+    }
+
+    @include mq(pc-M) {
+        width: 300px;
+        height: 300px;
+        margin-top: 10px;
+        margin-right: 40px;
+    }
+
+    @include mq(tab-M) {
+        width: 260px;
+        height: 260px;
+        margin-right: 35px;
+    }
+
+    @include mq(tab-L) {
+        width: 220px;
+        height: 220px;
+    }
+
+    @include mq(sp-H) {
+        width: 180px;
+        height: 180px;
+    }
+
+    @include mq(sp-M) {
+        width: 140px;
+        height: 140px;
+        margin-top: 15px;
+        margin-right: 35px;
+    }
+
+    @include mq(sp-L) {
+        width: 120px;
+        height: 120px;
+        margin-top: 5px;
+        margin-right: 10px;
+    }
+}
+
+.second-part-third {
+    position: relative;
+    @include mq(pc-H) {
+        padding-bottom: 140px;
+    }
+
+    @include mq(pc-M) {
+        padding-bottom: 180px;
+    }
+
+    @include mq(tab-H) {
+        padding-bottom: 140px;
+    }
+
+    @include mq(tab-M) {
+        padding-bottom: 120px;
+    }
+
+    @include mq(tab-L) {
+        padding-bottom: 100px;
+    }
+
+    @include mq(sp-M) {
+        padding-bottom: 90px;
+    }
+
+    @include mq(sp-L) {
+        padding-bottom: 70px;
+    }
+}
+
+.second-image-second {
+    position: relative;
+    z-index: 15;
+    @include mq(pc-H) {
+        width: 300px;
+        height: 200px;
+        top: 0;
+    }
+
+    @include mq(pc-M) {
+        width: 330px;
+        height: 220px;
+        top: 0;
+    }
+
+    @include mq(tab-H) {
+        width: 300px;
+        height: 200px;
+    }
+
+    @include mq(tab-M) {
+        width: 260px;
+        height: 170px;
+    }
+
+    @include mq(tab-L) {
+        width: 240px;
+        height: 160px;
+    }
+
+    @include mq(sp-H) {
+        width: 180px;
+        height: 120px;
+    }
+
+    @include mq(sp-M) {
+        width: 150px;
+        height: 100px;
+    }
+
+    @include mq(sp-L) {
+        width: 100px;
+        height: 60px;
+        top: -30px;
+    }
+}
+
+.second-image-third {
+    position: absolute;
+    right: 10px;
+    z-index: 10;
+
+    @include mq(pc-H) {
+        width: 430px;
+        bottom: 15px;
+    }
+
+    @include mq(pc-M) {
+        width: 500px;
+        bottom: 20px;
+    }
+
+    @include mq(tab-H) {
+        width: 430px;
+    }
+
+    @include mq(tab-M) {
+        width: 380px;
+        bottom: 15px;
+    }
+
+    @include mq(tab-L) {
+        width: 350px;
+    }
+
+    @include mq(sp-H) {
+        width: 300px;
+        bottom: 10px;
+    }
+
+    @include mq(sp-M) {
+        width: 250px;
+    }
+
+    @include mq(sp-L) {
+        width: 180px;
+    }
+}
+
+.second-part-fifth {
+    position: relative;
+
+    @include mq(pc-H) {
+        padding-bottom: 320px;
+    }
+
+    @include mq(pc-M) {
+        padding-bottom: 350px;
+    }
+
+    @include mq(tab-H) {
+        padding-bottom: 320px;
+    }
+
+    @include mq(tab-M) {
+        padding-bottom: 290px;
+    }
+
+    @include mq(tab-L) {
+        padding-bottom: 250px;
+    }
+
+    @include mq(sp-H) {
+        padding-bottom: 230px;
+    }
+
+    @include mq(sp-M) {
+        padding-bottom: 180px;
+    }
+
+    @include mq(sp-L) {
+        padding-bottom: 120px;
+    }
+}
+
+.second-image-forth {
+    position: absolute;
+    z-index: 15;
+
+    @include mq(pc-H) {
+        width: 240px;
+        left: 20px;
+        top: 100px;
+    }
+
+    @include mq(pc-M) {
+        width: 240px;
+        left: 20px;
+        top: 100px;
+    }
+
+    @include mq(tab-M) {
+        width: 200px;
+        left: 10px;
+        top: 80px;
+    }
+
+    @include mq(tab-L) {
+        width: 180px;
+    }
+
+    @include mq(sp-H) {
+        width: 150px;
+        top: 60px;
+    }
+
+    @include mq(sp-M) {
+        width: 115px;
+    }
+
+    @include mq(sp-L) {
+        width: 90px;
+        left: 0;
+        top: 50px;
+    }
+}
+
+.second-image-fifth {
+    position: absolute;
+    z-index: 10;
+
+    @include mq(pc-H) {
+        width: 430px;
+        left: 230px;
+        bottom: 15px;
+    }
+
+    @include mq(pc-M) {
+        width: 480px;
+        left: 220px;
+        bottom: 20px;
+    }
+
+    @include mq(tab-H) {
+        width: 430px;
+        left: 230px;
+    }
+
+    @include mq(tab-M) {
+        width: 380px;
+        left: 200px;
+        bottom: 15px;
+    }
+
+    @include mq(tab-L) {
+        width: 340px;
+        left: 170px;
+    }
+
+    @include mq(sp-H) {
+        width: 300px;
+        left: 140px;
+        bottom: 10px;
+    }
+
+    @include mq(sp-M) {
+        width: 240px;
+        left: 110px;
+    }
+
+    @include mq(sp-L) {
+        width: 160px;
+        left: 80px;
+    }
+}
+
+.second-line {
+    width: 1px;
+    position: absolute;
+    z-index: 5;
+    background: $color-lightBlue;
+
+    @include mq(pc-H) {
+        height: 1750px;
+        top: 20px;
+        left: 198px;
+    }
+
+    @include mq(pc-M) {
+        height: 1955px;
+        top: 20px;
+        left: 208px;
+    }
+
+    @include mq(tab-H) {
+        height: 1860px;
+        top: 20px;
+        left: 198px;
+    }
+
+    @include mq(tab-M) {
+        height: 1615px;
+        top: 15px;
+        left: 177px;
+    }
+
+    @include mq(tab-L) {
+        height: 1380px;
+        top: 10px;
+        left: 157px;
+    }
+
+    @include mq(sp-H) {
+        height: 1190px;
+        left: 125px;
+    }
+
+    @include mq(sp-M) {
+        height: 1025px;
+        left: 100px;
+    }
+
+    @include mq(sp-L) {
+        height: 860px;
+        top: 5px;
+        left: 80px;
+    }
+}
+
+// FAQ
+.parts-third {
+    @include mq(pc-H) {
+        margin-top: 100px;
+    }
+
+    @include mq(pc-M) {
+        margin-top: 140px;
+    }
+
+    @include mq(tab-M) {
+        margin-top: 100px;
+    }
+
+    @include mq(tab-L) {
+        margin-top: 80px;
+    }
+
+    @include mq(sp-M) {
+        margin-top: 60px;
+    }
+
+    @include mq(sp-L) {
+        margin-top: 30px;
+    }
+}
+
+.third-parts {
+    line-height: 1.2em;
+    border-bottom: 1px solid #777777;
+
+    @include mq(pc-H) {
+        font-size: 20px;
+        margin-top: 30px;
+        margin-left: 80px;
+        margin-right: 80px;
+    }
+
+    @include mq(pc-M) {
+        font-size: 24px;
+        margin-top: 30px;
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+
+    @include mq(tab-M) {
+        font-size: 20px;
+        margin-top: 30px;
+        margin-left: 80px;
+        margin-right: 80px;
+    }
+
+    @include mq(tab-L) {
+        font-size: 18px;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    @include mq(sp-H) {
+        font-size: 16px;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    @include mq(sp-M) {
+        font-size: 14px;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    @include mq(sp-L) {
+        font-size: 12px;
+    }
+}
+
+.third-question {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-bottom: 1px dotted #777777;
+
+    @include mq(pc-H) {
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-bottom: 10px;
+    }
+
+    @include mq(pc-M) {
+        margin-left: 15px;
+        margin-right: 15px;
+        padding-bottom: 15px;
+    }
+
+    @include mq(tab-M) {
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-bottom: 10px;
+    }
+
+    @include mq(sp-H) {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    @include mq(sp-M) {
+        padding-bottom: 5px;
+    }
+}
+
+.question-button {
+    display: block;
+    margin-top: auto;
+    width: 0;
+    height: 0;
+
+    @include mq(pc-H) {
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 14px solid $color-blue; /* Xpx(left,right) * √3 ≈ Ypx(top) で正三角形 */
+    }
+
+    @include mq(pc-M) {
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-top: 18px solid $color-blue; /* Xpx(left,right) * √3 ≈ Ypx(top) で正三角形 */
+    }
+
+    @include mq(tab-M) {
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 14px solid $color-blue; /* Xpx(left,right) * √3 ≈ Ypx(top) で正三角形 */
+    }
+
+    @include mq(sp-M) {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 12px solid $color-blue; /* Xpx(left,right) * √3 ≈ Ypx(top) で正三角形 */
+    }
+
+    @include mq(sp-L) {
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 9px solid $color-blue; /* Xpx(left,right) * √3 ≈ Ypx(top) で正三角形 */
+    }
+}
+
+.third-answer {
+
+    @include mq(pc-H) {
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    @include mq(pc-M) {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    @include mq(tab-M) {
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    @include mq(sp-H) {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    @include mq(sp-M) {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+//form
+.parts-forth {
+    @include mq(pc-H) {
+        margin-top: 100px;
+    }
+
+    @include mq(pc-M) {
+        margin-top: 140px;
+    }
+
+    @include mq(tab-M) {
+        margin-top: 100px;
+    }
+
+    @include mq(tab-L) {
+        margin-top: 80px;
+    }
+
+    @include mq(sp-M) {
+        margin-top: 60px;
+    }
+
+    @include mq(sp-L) {
+        margin-top: 30px;
+    }
+}
+
+.forth-form {
+    margin-left: auto;
+    margin-right: auto;
+
+    @include mq(pc-H) {
+        margin-top: 30px;
+        width: 860px;
+    }
+
+    @include mq(pc-M) {
+        margin-top: 40px;
+        width: 1010px;
+    }
+
+    @include mq(tab-H) {
+        width: 890px;
+    }
+
+    @include mq(tab-M) {
+        margin-top: 30px;
+        width: 770px;
+    }
+
+    @include mq(tab-L) {
+        margin-top: 20px;
+        width: 650px;
+    }
+
+    @include mq(sp-H) {
+        width: 530px;
+    }
+
+    @include mq(sp-M) {
+        margin-top: 15px;
+        width: 420px;
+    }
+
+    @include mq(sp-L) {
+        margin-top: 5px;
+        width: 300px;
+    }
+
+    iframe {
+        @include mq(pc-H) {
+            height: 1415px;
+            width: 860px;
+        }
+
+        @include mq(pc-M) {
+            width: 1010px;
+            height: 1415px;
+        }
+
+        @include mq(tab-H) {
+            width: 890px;
+        }
+
+        @include mq(tab-M) {
+            width: 770px;
+        }
+
+        @include mq(tab-L) {
+            height: 1460px;
+            width: 650px;
+        }
+
+        @include mq(sp-H) {
+            height: 1500px;
+            width: 530px;
+        }
+
+        @include mq(sp-M) {
+            height: 1580px;
+            width: 420px;
+        }
+
+        @include mq(sp-L) {
+            height: 1845px;
+            width: 300px;
+        }
+    }
+}
+
+.forth-text {
+    line-height: 1.2em;
+
+    @include mq(pc-H) {
+        font-size: 18px;
+        margin-left: 100px;
+        margin-right: 100px;
+        margin-bottom: 80px;
+    }
+
+    @include mq(pc-M) {
+        font-size: 20px;
+        margin-left: 140px;
+        margin-right: 140px;
+        margin-bottom: 0;
+    }
+
+    @include mq(tab-M) {
+        font-size: 18px;
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+ 
+    @include mq(tab-L) {
+        font-size: 14px;
+        margin-left: 80px;
+        margin-right: 80px;
+    }
+
+    @include mq(sp-H) {
+        font-size: 12px;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    @include mq(sp-M) {
+        font-size: 10px;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    @include mq(sp-L) {
+        font-size: 8px;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+}
+
+// フッター
+footer {
+    background: $color-footer;
+    display: flex;
+    justify-content: space-between;
+
+    @include mq(pc-H) {
+        display: none;
+    }
+
+    @include mq(pc-M) {
+        margin-top: 140px;
+        padding: 25px 50px;
+    }
+
+    @include mq(tab-M) {
+        margin-top: 100px;
+        padding: 20px 40px;
+    }
+
+    @include mq(tab-L) {
+        margin-top: 80px;
+    }
+
+    @include mq(sp-M) {
+        margin-top: 60px;
+        padding: 15px 20px;
+    }
+
+    @include mq(sp-L) {
+        margin-top: 30px;
+        padding: 10px 15px;
+    }
+}
+
+.footer-left {
+    color: #fff;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    @include mq(pc-M) {
+        font-size: 20px;
+    }
+
+    @include mq(tab-M) {
+        font-size: 18px;
+    }
+
+    @include mq(tab-L) {
+        font-size: 16px;
+    }
+
+    @include mq(sp-H) {
+        font-size: 14px;
+    }
+
+    @include mq(sp-M) {
+        font-size: 12px;
+    }
+
+    @include mq(sp-L) {
+        font-size: 10px;
+    }
+}
+
+.footer-text-top {
+
+    @include mq(pc-M) {
+        margin-bottom: 20px;
+    }
+
+    @include mq(tab-M) {
+        margin-bottom: 15px;
+    }
+
+    @include mq(sp-H) {
+        margin-bottom: 10px;
+    }
+
+    @include mq(sp-L) {
+        margin-bottom: 5px;
+    }
+}
+
+.footer-right {
+
+    @include mq(pc-M) {
+        width: 150px;
+        height: 150px;
+    }
+
+    @include mq(tab-M) {
+        width: 120px;
+        height: 120px;
+    }
+
+    @include mq(tab-L) {
+        width: 100px;
+        height: 100px;
+    }
+
+    @include mq(sp-H) {
+        width: 80px;
+        height: 80px;
+    }
+
+    @include mq(sp-M) {
+        width: 65px;
+        height: 65px;
+    }
+
+    @include mq(sp-L) {
+        width: 50px;
+        height: 50px;
+    }
+}
