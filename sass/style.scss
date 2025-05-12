@@ -186,7 +186,7 @@ a {
 }
 
 .pc-bg-btn {  
-    background: linear-gradient(to bottom, $color-lightBlue 30%, $color-blue 50%, $color-lightBlue 70%); // 好きなグラデーション
+    background: linear-gradient(to bottom, $color-lightBlue 45%, $color-blue 60%, $color-lightBlue 75%); // 好きなグラデーション
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: relative;
@@ -197,7 +197,7 @@ a {
         content: "";
         width: 3px;
         height: 20px;
-        background: linear-gradient(to bottom, $color-lightBlue 30%, $color-blue 50%, $color-lightBlue 70%);
+        background: linear-gradient(to bottom, $color-lightBlue 45%, $color-blue 60%, $color-lightBlue 75%);
         position: absolute;
         top: 50%;
         left: 0;

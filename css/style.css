@@ -150,8 +150,8 @@ a {
 }
 
 .pc-bg-btn {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #6EC5EE), color-stop(50%, #065190), color-stop(70%, #6EC5EE));
-  background: linear-gradient(to bottom, #6EC5EE 30%, #065190 50%, #6EC5EE 70%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(45%, #6EC5EE), color-stop(60%, #065190), color-stop(75%, #6EC5EE));
+  background: linear-gradient(to bottom, #6EC5EE 45%, #065190 60%, #6EC5EE 75%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   position: relative;
@@ -162,8 +162,8 @@ a {
   content: "";
   width: 3px;
   height: 20px;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #6EC5EE), color-stop(50%, #065190), color-stop(70%, #6EC5EE));
-  background: linear-gradient(to bottom, #6EC5EE 30%, #065190 50%, #6EC5EE 70%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(45%, #6EC5EE), color-stop(60%, #065190), color-stop(75%, #6EC5EE));
+  background: linear-gradient(to bottom, #6EC5EE 45%, #065190 60%, #6EC5EE 75%);
   position: absolute;
   top: 50%;
   left: 0;
