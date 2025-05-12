@@ -150,7 +150,10 @@ a {
 }
 
 .pc-bg-btn {
-  color: #6EC5EE;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #6EC5EE), color-stop(50%, #065190), color-stop(70%, #6EC5EE));
+  background: linear-gradient(to bottom, #6EC5EE 30%, #065190 50%, #6EC5EE 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   position: relative;
   padding-left: 15px;
   margin-bottom: 30px;
@@ -159,8 +162,8 @@ a {
   content: "";
   width: 3px;
   height: 20px;
-  background: -webkit-gradient(linear, left top, left bottom, from(#6EC5EE), color-stop(#065190), to(#6EC5EE));
-  background: linear-gradient(#6EC5EE, #065190, #6EC5EE);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #6EC5EE), color-stop(50%, #065190), color-stop(70%, #6EC5EE));
+  background: linear-gradient(to bottom, #6EC5EE 30%, #065190 50%, #6EC5EE 70%);
   position: absolute;
   top: 50%;
   left: 0;
